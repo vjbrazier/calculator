@@ -1,0 +1,22 @@
+#problem-history {
+    display: grid;
+    margin: 0px 10% 0px 10%;
+    grid-template-columns: 75% 25%;
+}
+
+#problem {
+    display: block;
+}
+
+#history {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+
+}
+
+#numbers-and-functions {
+    display: grid;
+    margin: 0px 10% 0px 10%;
+    grid-template-columns: 25% 25% 25% 25%;
+}
