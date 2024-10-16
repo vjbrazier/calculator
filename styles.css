@@ -20,3 +20,8 @@
     margin: 0px 10% 0px 10%;
     grid-template-columns: 25% 25% 25% 25%;
 }
+
+.calc-button {
+    padding: 10px 10px 10px 10px;
+    background-color: lightblue;
+}
