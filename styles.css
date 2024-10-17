@@ -1,18 +1,36 @@
-#problem-history {
+/* Background color */
+body {
+    background: linear-gradient(to right, darkred, red, darkred);
+}
+
+/* Section for the entered probem, and the history button */
+#problem-and-history {
     display: grid;
-    margin: 0px 10% 0px 10%;
+    margin: 0px 10% 0px 10%; /* Centers it dynamically */
     grid-template-columns: 75% 25%;
 }
 
 #problem {
-    display: block;
+    padding-top: 5px;  /* Readability */
+    padding-left: 5px; /* Readability */
+    border: 1px solid black;
+    border-radius: 10px 0px 0px 10px;
+    background-color: white;
 }
 
 #history {
-    display: flex;
     justify-self: center;
     align-self: center;
-
+    width: 100%;
+}
+#history button {
+    width: 100%; /* Applying this to the div and button makes it take up the whole size */
+    color: white;
+    background-color: #0d6efd;
+    padding: 20px 40px 20px 40px;
+    border: 1px solid black;
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
 }
 
 #numbers-and-functions {
@@ -20,8 +38,29 @@
     margin: 0px 10% 0px 10%;
     grid-template-columns: 25% 25% 25% 25%;
 }
+/* These four selectors are purely for visuals */
+#number0 {
+    border-top-left-radius: 10px;
+}
+#button-CE {
+    border-top-right-radius: 10px;
+}
+#number9 {
+    border-bottom-left-radius: 10px;
+}
+#button-equals {
+    border-bottom-right-radius: 10px;
+}
 
+/* The calculator buttons */
 .calc-button {
-    padding: 10px 10px 10px 10px;
-    background-color: lightblue;
+    border: 1px solid black;
+    padding: 20px 40px 20px 40px;
+    background-color: lavender;
+    transition: 1s;
+}
+.calc-button:hover {
+    cursor: pointer;
+    transition: 1s;
+    background-color: white;
 }

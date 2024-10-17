@@ -11,35 +11,43 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <div id="problem-history">
+    <br>
+
+    <div id="problem-and-history">
+        <!-- Separate divs, to use grid and make the problem box bigger-->
         <div id="problem">
-            <p>Current problem: </p>
-            <p>The answer is: </p>
+            <!-- Spans can be inserted without making a new line. 
+                 I will use this to add in the numbers clicked. -->
+            <p>Current problem: <span id="problem-textbox"></span></p>
+            <p>The answer is:   <span id="answer-textbox" ></span></p>
         </div>
         <div id="history">
             <button>View History</button>
         </div>
     </div>
+    <br> <!-- Readability -->
+
+    <!-- Shared classes for easy editing. Unique IDs for calculating -->
     <div id="numbers-and-functions">
-        <button id="number0" class="calc-button">0</button>
-        <button id="number1" class="calc-button">1</button>
-        <button id="number2" class="calc-button">2</button>
-        <button id="button-CE" class="calc-button">CE</button>
+        <button id="number0"         class="calc-button">0</button>
+        <button id="number1"         class="calc-button">1</button>
+        <button id="number2"         class="calc-button">2</button>
+        <button id="button-CE"       class="calc-button">CE</button>
 
-        <button id="number3" class="calc-button">3</button>
-        <button id="number4" class="calc-button">4</button>
-        <button id="number5" class="calc-button">5</button>
-        <button id="button-minus" class="calc-button">-</button>
+        <button id="number3"         class="calc-button">3</button>
+        <button id="number4"         class="calc-button">4</button>
+        <button id="number5"         class="calc-button">5</button>
+        <button id="button-minus"    class="calc-button">-</button>
 
-        <button id="number6" class="calc-button">6</button>
-        <button id="number7" class="calc-button">7</button>
-        <button id="number8" class="calc-button">8</button>
-        <button id="button-divide" class="calc-button">/</button>
+        <button id="number6"         class="calc-button">6</button>
+        <button id="number7"         class="calc-button">7</button>
+        <button id="number8"         class="calc-button">8</button>
+        <button id="button-divide"   class="calc-button">/</button>
         
-        <button id="number9" class="calc-button">9</button>
+        <button id="number9"         class="calc-button">9</button>
         <button id="button-multiply" class="calc-button">*</button>
-        <button id="button-add" class="calc-button">+</button>
-        <button id="button-equals" class="calc-button">=</button>
+        <button id="button-add"      class="calc-button">+</button>
+        <button id="button-equals"   class="calc-button">=</button>
     </div>
 </body>
 </html>
