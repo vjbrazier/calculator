@@ -53,13 +53,13 @@ body {
 }
 
 /* The calculator buttons */
-.calc-button {
+.calc-number, .calc-button {
     border: 1px solid black;
     padding: 20px 40px 20px 40px;
     background-color: lavender;
     transition: 1s;
 }
-.calc-button:hover {
+.calc-number:hover, .calc-button:hover {
     cursor: pointer;
     transition: 1s;
     background-color: white;
