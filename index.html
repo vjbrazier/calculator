@@ -9,8 +9,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <br>
+    <div id="history-panel">
+        <div>
+            <h2>Calculator History <button id="close-history">X</button></h2>
+            <br>
+            
+            <p>2+2</p>
+            <button id="load">Load</button>
+            <button id="delete">Delete</button>
+        
+            <p>2+2</p>
+            <button id="load">Load</button>
+            <button id="delete">Delete</button>
+        </div>
+    </div>
 
+    
+    <br>
+        
     <div id="problem-and-history">
         <!-- Separate divs, to use grid and make the problem box bigger-->
         <div id="problem">
@@ -20,7 +36,7 @@
             <p>The answer is:   <span id="answer-textbox" ></span></p>
         </div>
         <div id="history">
-            <button>View History</button>
+            <button id="button-history">View History</button>
         </div>
     </div>
     <br> <!-- Readability -->
