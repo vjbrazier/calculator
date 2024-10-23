@@ -49,6 +49,7 @@ body {
 #history-panel.visible {
     left: 0%;
     transition: 1s;
+    height: 100%;
 }
 #history {
     justify-self: center;

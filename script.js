@@ -8,10 +8,6 @@ let problem_history = [];
 let answer_history = [];
 let history_total = 0;
 
-let load_problems = document.getElementsByClassName('load-problem');
-let load_answers = document.getElementsByClassName('load-answer');
-let delete_entries = document.getElementsByClassName('delete-entry');
-
 //Adds the numbers/symbols to the problem text. Symbols need a space, hence the separation
 for (var i = 0; i < numbers.length; i++) {
     numbers[i].addEventListener('click', function(event) {
@@ -35,15 +31,17 @@ for (var i = 0; i < symbols.length; i++) {
 //This was working, but after adding the history functionality, it stopped.
 //The conditional that makes each one unique came from ChatGPT.
 document.getElementById('button-history').addEventListener('click', function() {
-    if (!document.getElementById('history-panel').classList.contains('visible')) {
-        document.getElementById('history-panel').classList.add('visible');
-    }
+    document.getElementById('history-panel').classList.toggle('visible');
+    
+    // if (!document.getElementById('history-panel').classList.contains('visible')) {
+        // document.getElementById('history-panel').classList.add('visible');
+    // }
 });
-document.getElementById('close-history').addEventListener('click', function() {
-    if (document.getElementById('history-panel').classList.contains('visible')) {
-        document.getElementById('history-panel').classList.remove('visible');
-    }
-});
+// document.getElementById('close-history').addEventListener('click', function() {
+//     if (document.getElementById('history-panel').classList.contains('visible')) {
+//         document.getElementById('history-panel').classList.remove('visible');
+//     }
+// });
 
 //Clears the textbox and current equation when clicking CE
 document.getElementById('button-CE').addEventListener('click', function(event) {
@@ -76,7 +74,6 @@ function solve(equation) {
                 equation_fragments[i] = Number(equation_fragments[i]);
         }
     }
-    console.log(equation_fragments);
 
     //Multiplication/division
     while ((equation_fragments.includes('*')) || (equation_fragments.includes('/'))) {
@@ -94,10 +91,9 @@ function solve(equation) {
            }
        }
     }
-    console.log(equation_fragments);
 
     //Addition/subtraction
-    while ((equation_fragments.includes('+')) || (equation_fragments.includes('/'))) {
+    while ((equation_fragments.includes('+')) || (equation_fragments.includes('-'))) {
         for (let i = 0; i < equation_fragments.length; i++) {
             if (equation_fragments[i] === '+') {
                 equation_fragments[i-1] = equation_fragments[i-1] + equation_fragments[i+1];
@@ -112,7 +108,6 @@ function solve(equation) {
             }
         }
     }
-    console.log(equation_fragments);
     
     return equation_fragments[0];
 }
@@ -123,21 +118,13 @@ function solve(equation) {
 function addToHistory(equation) {
     problem_history[history_total] = current_equation;
     answer_history[history_total] = solve(current_equation);
-    document.getElementById('history-list').innerHTML += '<p>' + problem_history[history_total] + '</p>' +
-                                                         '<p>= ' + answer_history[history_total] + '</p>' +
-                                                         '<button class="load-problem" id="load-problem-' + history_total + '">Load Problem</button>' +
-                                                         '<button class="load-answer"  id="load-answer-' + history_total + '">Load Answer</button>' +
-                                                         '<button class="delete-entry" id="delete-entry-' + history_total + '">Delete</button>';
+    document.getElementById('history-list').innerHTML += '<p id="p' + history_total + '">' + problem_history[history_total] + '</p>' +
+                                                         '<p id="a' + history_total + '">= ' + answer_history[history_total] + '</p>' +
+                                                         '<button id="lp' + history_total + '" class="load-problem" >Load Problem ' + history_total + '</button>' +
+                                                         '<button id="la' + history_total + '" class="load-answer"  >Load Answer ' + history_total + '</button>' +
+                                                         '<button id="d' + history_total + '" class="delete-entry" >Delete Entry ' + history_total + '</button>';
     history_total ++;
 }
-
-for (let i = 0; i < load_problems.length; i++) {
-    load_problems[i].addEventListener('click', function(event) {
-        if (i == event.target.id.substring(event.target.id.length-1, event.target.length)) {
-            
-        } 
-    });
-};
 
 //Used to display the answer, update the history, and reset the current equation
 document.getElementById('button-equals').addEventListener('click', function(event) {
@@ -147,8 +134,74 @@ document.getElementById('button-equals').addEventListener('click', function(even
         addToHistory(current_equation);
         document.getElementById('problem-textbox').innerHTML = '';
         document.getElementById('answer-textbox').innerHTML = solve(current_equation);
+        update_history();
         current_equation = '';
     } else {
         document.getElementById('answer-textbox').innerHTML = "It looks like your equation is blank, or unfinished.";
     }; 
 });
+
+function update_history() {
+    let load_problems = document.getElementsByClassName('load-problem');
+    let load_answers = document.getElementsByClassName('load-answer');
+    let delete_entries = document.getElementsByClassName('delete-entry');
+
+    for (let i = 0; i < load_problems.length; i++) {
+        load_problems[i].addEventListener('click', function(event) {
+            if (history_total < 10) {
+                if (i == (event.target.innerHTML.substring(13,14))) {
+                    document.getElementById('problem-textbox').innerHTML += problem_history[i];
+                    current_equation += problem_history[i];
+                } 
+            } else {
+                if (i == (event.target.innerHTML.substring(13,15))) {
+                    document.getElementById('problem-textbox').innerHTML += problem_history[i];
+                    current_equation += problem_history[i];
+                } ;
+            };
+        });
+    };
+    
+    for (let i = 0; i < load_answers.length; i++) {
+        load_answers[i].addEventListener('click', function(event) {
+            if (history_total < 10) {
+                if (i == (event.target.innerHTML.substring(12,13))) {
+                    document.getElementById('problem-textbox').innerHTML += answer_history[i];
+                    current_equation += answer_history[i];
+                }
+            } else {
+                if (i == (event.target.innerHTML.substring(12,14))) {
+                    document.getElementById('problem-textbox').innerHTML += answer_history[i];
+                    current_equation += answer_history[i];
+                };
+            };
+        });
+    };
+
+    for (let i = 0; i < delete_entries.length; i++) {
+        delete_entries[i].addEventListener('click', function(event) {
+            if (history_total < 10) {
+                if (i == (event.target.innerHTML.substring(13,14))) {
+                    document.getElementById('p' + i).remove();
+                    document.getElementById('a' + i).remove();
+                    load_problems[i].remove();
+                    load_answers[i].remove();
+                    problem_history[i] = '';
+                    answer_history[i] = '';
+                    delete_entries[i].remove();
+                }
+            } else {
+                if (i == (event.target.innerHTML.substring(13,15))) {
+                    document.getElementById('p' + i).remove();
+                    document.getElementById('a' + i).remove();
+                    document.getElementById('lp' + i).remove();
+                    document.getElementById('la' + i).remove();
+                    problem_history[i] = '';
+                    answer_history[i] = '';
+                    event.target.remove();
+                    //document.getElementById('d' + i).remove();
+                };
+            };
+        });
+    };
+}
